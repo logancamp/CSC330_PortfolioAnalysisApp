@@ -18,7 +18,13 @@ else if ($method == "post") {
     $response["numShares"] = $data->numShares;
     $response["dateCreated"] = time();
     $response["originServer"] = gethostname();
-    http_response_code(200);
+    if ($response["stockTicker"] === null) {
+        http_response_code(500);
+        die();
+    }
+    else {
+        http_response_code(200);
+    }
 }
 else {
     http_response_code(405);
